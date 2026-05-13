@@ -1,7 +1,7 @@
 export const heroIcons = [
   {
     src: '/icons/css.png',
-    className: 'top-[15%] right-[20%] animate-pulse duration-200',
+    className: 'top-[25%] right-[30%] animate-pulse duration-200',
   },
   {
     src: '/icons/html.png',
@@ -25,7 +25,7 @@ export const heroIcons = [
   },
 ];
 
-export const heroCard = [
+export const heroCards = [
   {
     title: 'Frontend',
     body: 'Frontend Development Building modern, responsive and clean interfaces with React, Next.js, Tailwind CSS and shadcn/ui. Focused on beautiful layouts, reusable components, smooth user flows and pixel-perfect design.',

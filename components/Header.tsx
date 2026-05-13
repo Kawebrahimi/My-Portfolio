@@ -5,6 +5,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useRef } from 'react';
 import NavItem from './NavItem';
+import GithubBtn from './GithubBtn';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -95,7 +96,6 @@ const Header = () => {
           <span className='text-kaweb2-500'>KA</span>
           <span className='text-white'>WEB</span>
         </div>
-
         <ul
           ref={menuRef}
           className='flex items-center gap-6 text-sm text-white overflow-hidden justify-end'

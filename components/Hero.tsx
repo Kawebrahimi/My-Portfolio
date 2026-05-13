@@ -1,11 +1,65 @@
-'use client'
-import { heroCard, heroIcons } from '@/constants/hero-section';
+'use client';
+import { heroCards, heroIcons } from '@/constants/hero-section';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import HeroCard from './HeroCard';
 import { TypeAnimation } from 'react-type-animation';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import { useLayoutEffect, useRef } from 'react';
+import { SplitText } from 'gsap/SplitText';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(SplitText, ScrollTrigger);
 
 const Hero = () => {
+  const heroCardRef = useRef<HTMLDivElement>(null);
+  const heroTitleRef = useRef<HTMLHeadingElement>(null);
+
+  useLayoutEffect(() => {
+    if (!heroTitleRef.current) return;
+
+    const ctx = gsap.context(() => {
+      const split = new SplitText(heroTitleRef.current, {
+        type: 'chars',
+      });
+      gsap.from(split.chars, {
+        y: 80,
+        opacity: 0,
+        rotateX: 90,
+        filter: 'blur(8px)',
+        duration: 1,
+        ease: 'power3.out',
+        stagger: 0.05,
+        scrollTrigger: {
+          trigger: heroTitleRef.current,
+          start: 'top 80%',
+          toggleActions: 'play none none reverse',
+        },
+      });
+    }, heroTitleRef);
+    return () => ctx.revert();
+  }, []);
+
+  useGSAP(() => {
+    const introTimeline = gsap.timeline();
+
+    introTimeline.fromTo(
+      heroCardRef.current,
+      {
+        filter: 'blur(8px)',
+        opacity: 0,
+        translateY: 30,
+      },
+      {
+        filter: 'blur(0px)',
+        opacity: 0.8,
+        translateY: '0',
+        duration: 1,
+      },
+    );
+  });
+
   return (
     <section className='px-8 flex sm:flex-col xl:flex-row sm:items-center lg:items-stretch lg:gap-10'>
       <div>
@@ -28,7 +82,10 @@ const Hero = () => {
             </div>
           ))}
         </div>
-        <div className='border-kaweb2-900 border-t-2  rounded-t-2xl max-h-125 h-full relative flex items-center justify-center'>
+        <div
+          ref={heroCardRef}
+          className='border-kaweb2-900 border-t-2  rounded-t-2xl max-h-125 h-full relative flex items-center justify-center'
+        >
           <div className='max-h-150 max-w-150'>
             <Image
               className='size-full animate-pulse -z-1 absolute-center opacity-20 scale-120 blur-xs'
@@ -57,8 +114,9 @@ const Hero = () => {
       </div>
       <div className='flex text-white border-kaweb2-900 lg:border-t-2  rounded-t-2xl flex-1 p-6 flex-col gap-5'>
         <div className='text-center space-y-2'>
-          <h1>
-            Hi i&apos;m <span className='text-kaweb2-500'>Ka</span>
+          <h1 ref={heroTitleRef} className='text-gray-300'>
+            <span> Hi i&apos;m</span>{' '}
+            <span className='text-kaweb2-500'>Ka</span>
             <span>web</span>
           </h1>
           <h3>
@@ -83,7 +141,7 @@ const Hero = () => {
           </h3>
         </div>
         <div className='flex gap-4 sm:flex-wrap'>
-          {heroCard.map((card, index) => (
+          {heroCards.map((card, index) => (
             <HeroCard key={index} title={card.title} body={card.body}>
               {card.icons.map((icon, index) => (
                 <Image
