@@ -84,4 +84,22 @@ export const heroCards = [
       },
     ],
   },
+  {
+    title: 'Tools & Workflow',
+    body: 'Managing projects with Git, GitHub, package managers and modern development workflows. Focused on clean code, organized file structures, reusable patterns, version control and smooth collaboration.',
+    icons: [
+      {
+        src: '/icons/github.png',
+        alt: 'github-icon',
+      },
+      {
+        src: '/icons/docker.png',
+        alt: 'docker-icon',
+      },
+      {
+        src: '/icons/api.png',
+        alt: 'api-icon',
+      },
+    ],
+  },
 ];

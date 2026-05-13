@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Inter } from 'next/font/google';
 import './globals.css';
 import { cn } from '@/lib/utils';
 import Header from '@/components/Header';
+import SmoothScroll from '@/components/SmoothScroll';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
@@ -39,8 +40,8 @@ export default function RootLayout({
       )}
     >
       <body className='flex flex-col min-h-300 bg-slate-950'>
-        <Header/>
-        {children}
+        <Header />
+        <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>
   );

@@ -15,6 +15,7 @@ gsap.registerPlugin(SplitText, ScrollTrigger);
 const Hero = () => {
   const heroCardRef = useRef<HTMLDivElement>(null);
   const heroTitleRef = useRef<HTMLHeadingElement>(null);
+  const heroRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
     if (!heroTitleRef.current) return;
@@ -41,24 +42,41 @@ const Hero = () => {
     return () => ctx.revert();
   }, []);
 
-  useGSAP(() => {
-    const introTimeline = gsap.timeline();
+  useGSAP(
+    () => {
+      const introTimeline = gsap.timeline();
+      introTimeline.fromTo(
+        heroCardRef.current,
+        {
+          filter: 'blur(8px)',
+          opacity: 0,
+          translateY: 30,
+        },
+        {
+          filter: 'blur(0px)',
+          opacity: 0.8,
+          translateY: '0',
+          duration: 1,
+        },
+      );
 
-    introTimeline.fromTo(
-      heroCardRef.current,
-      {
-        filter: 'blur(8px)',
-        opacity: 0,
-        translateY: 30,
-      },
-      {
-        filter: 'blur(0px)',
-        opacity: 0.8,
-        translateY: '0',
-        duration: 1,
-      },
-    );
-  });
+      const cardTimeline = gsap.timeline();
+      cardTimeline.fromTo(
+        '.hero-card',
+        {
+          opacity: 0,
+          translateY: 20,
+        },
+        {
+          opacity: 1,
+          translateY: 0,
+          duration: 0.8,
+          stagger: 0.5
+        },
+      );
+    },
+    { scope: heroRef },
+  );
 
   return (
     <section className='px-8 flex sm:flex-col xl:flex-row sm:items-center lg:items-stretch lg:gap-10'>
@@ -140,12 +158,12 @@ const Hero = () => {
             />
           </h3>
         </div>
-        <div className='flex gap-4 sm:flex-wrap'>
+        <div className='grid grid-cols-1 sm:grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 xxl:grid-col-3' ref={heroRef}>
           {heroCards.map((card, index) => (
             <HeroCard key={index} title={card.title} body={card.body}>
               {card.icons.map((icon, index) => (
                 <Image
-                  className='size-10'
+                  className='size-7'
                   key={index}
                   src={icon.src}
                   alt={icon.alt}

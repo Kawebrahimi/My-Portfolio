@@ -6,6 +6,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useRef } from 'react';
 import NavItem from './NavItem';
 import GithubBtn from './GithubBtn';
+import { headerItems } from '@/constants/header-items';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -100,10 +101,9 @@ const Header = () => {
           ref={menuRef}
           className='flex items-center gap-6 text-sm text-white overflow-hidden justify-end'
         >
-          <NavItem>Home</NavItem>
-          <NavItem>About</NavItem>
-          <NavItem>Projects</NavItem>
-          <NavItem>Contact</NavItem>
+          {headerItems.map((i, index)=> (
+            <NavItem key={index}>{i.title}</NavItem>
+          ))}
         </ul>
       </nav>
     </header>

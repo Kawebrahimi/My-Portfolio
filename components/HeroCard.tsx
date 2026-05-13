@@ -9,7 +9,7 @@ const HeroCard = ({
 }) => {
   return (
     <div className='hero-card'>
-      <div className='flex items-center justify-between mb-2'>
+      <div className='flex flex-col gap-2 mb-2'>
         <h3>{title}</h3>
         <span className='inline-flex items-center'>{children}</span>
       </div>
