@@ -1,15 +1,17 @@
 'use client';
 
-import { ReactNode, useRef } from 'react';
+import { useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 
 type SectionTitleProps = {
-  children: ReactNode;
+  title: string;
+  children: React.ReactNode;
   className?: string;
 };
 
 export default function SectionTitle({
+  title,
   children,
   className = '',
 }: SectionTitleProps) {
@@ -21,7 +23,7 @@ export default function SectionTitle({
         scrollTrigger: {
           trigger: containerRef.current,
           start: 'top 70%',
-          once: true,
+          toggleActions: 'play none none reverse',
         },
       });
 
@@ -31,6 +33,12 @@ export default function SectionTitle({
         duration: 0.5,
         ease: 'power3.out',
       })
+        .from('.badge-description', {
+          y: -20,
+          opacity: 0,
+          duration: 0.5,
+          ease: 'power3.out',
+        })
         .from(
           '.badge-border',
           {
@@ -45,7 +53,7 @@ export default function SectionTitle({
           '.badge-bg',
           {
             maxWidth: '0',
-            backgroundColor: 'transparent'
+            background: 'transparent',
           },
           {
             rotateY: 0,
@@ -53,7 +61,7 @@ export default function SectionTitle({
             duration: 0.6,
             maxWidth: '100%',
             ease: 'power3.out',
-            backgroundColor: 'rgba(16, 83, 105, 0.4)'
+            background: 'linear-gradient(90deg,rgba(16, 83, 105, 0.7) 0%, rgba(16, 83, 105, 0.2) 100%)',
           },
           '-=0.15',
         );
@@ -66,13 +74,14 @@ export default function SectionTitle({
   return (
     <div
       ref={containerRef}
-      className={`relative mx-auto mt-20 max-w-fit rounded-full px-8 py-4 lg:mt-30 perspective-[1000px] transform-3d ${className}`}
+      className={`mb-2 relative mx-auto mt-20 max-w-fit rounded-md px-8 py-4 lg:mt-30 perspective-[1000px] transform-3d text-center ${className}`}
     >
-      <span className='badge-bg absolute inset-0 -z-10 rounded-full bg-linear-to-r' />
+      <span className='badge-bg absolute inset-0 -z-10 rounded-md bg-linear-to-r' />
 
-      <span className='badge-border absolute inset-0 -z-20 rounded-full border-2 border-kaweb2-600' />
+      <span className='badge-border absolute inset-0 -z-20 rounded-md border-2 border-kaweb2-600' />
 
-      <h2 className='badge-text relative z-10 font-bold '>{children}</h2>
+      <h2 className='badge-text relative z-10 font-bold mb-2'>{title}</h2>
+      <p className='badge-description text-gray-300'>{children}</p>
     </div>
   );
 }

@@ -6,13 +6,14 @@ import {
   CardDescription,
   CardFooter,
   CardHeader,
-} from './ui/card';
-import BtnHover1 from './BtnHover1';
+} from '../ui/card';
+import BtnHover1 from '../BtnHover1';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import { useRef } from 'react';
-import SectionTitle from './SectionTitle';
+import SectionTitle from '../SectionTitle';
+import GlareHover from '../ui/glare-hover';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -124,7 +125,9 @@ const Projects = () => {
           alt='spider-web'
           className='opacity-40 blur-[0.6px] absolute -z-20'
         />
-        <SectionTitle>Projects</SectionTitle>
+        <SectionTitle title='Projects'>
+          My Projects and my experiences
+        </SectionTitle>
       </div>
       <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 px-8'>
         <div
@@ -132,41 +135,51 @@ const Projects = () => {
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
-          <Card className='kaweb-card bg-transparent hover:from-kaweb-500/40 hover:border-kaweb-500/50 transition duration-500 group/card'>
-            <CardHeader className='space-y-2'>
-              <h5 className='text-xl text-kaweb2-500 font-bold'>
-                Orkelo Project Management App
-              </h5>
-              <CardDescription className='text-white/80 space-y-1'>
-                <p>
-                  Worked as{' '}
-                  <span className='font-semibold'>Frontend Developer</span>
+          <GlareHover
+            className='bg-transparent'
+            glareColor='#ffffff'
+            glareOpacity={0.3}
+            glareAngle={-30}
+            glareSize={300}
+            transitionDuration={800}
+            playOnce={false}
+          >
+            <Card className='kaweb-card bg-transparent hover:from-kaweb-500/40 hover:border-kaweb-500/50 transition duration-500 group/card'>
+              <CardHeader className='space-y-2'>
+                <h5 className='text-xl text-kaweb2-500 font-bold'>
+                  Orkelo Project Management App
+                </h5>
+                <CardDescription className='text-white/80 space-y-1'>
+                  <p>
+                    Worked as{' '}
+                    <span className='font-semibold'>Frontend Developer</span>
+                  </p>
+                  <p>Technologies: React, Redux, Bootstrap, dnd kit, axios</p>
+                </CardDescription>
+              </CardHeader>
+              <CardContent className='space-y-2'>
+                <div className=' overflow-hidden rounded-md'>
+                  <Image
+                    width={1000}
+                    height={1000}
+                    src='/images/orkelo-screenshot.jpg'
+                    alt='orkelo'
+                    className='group-hover/card:scale-110 transition-transform duration-600'
+                  />
+                </div>
+                <p className='text-gray-300 text-xs'>
+                  {' '}
+                  project management and task tracking app where users can
+                  create tasks, set reminders, manage checklists, drag and drop
+                  tasks and columns, upload daily reports, track time and manage
+                  financial operations.
                 </p>
-                <p>Technologies: React, Redux, Bootstrap, dnd kit, axios</p>
-              </CardDescription>
-            </CardHeader>
-            <CardContent className='space-y-2'>
-              <div className=' overflow-hidden rounded-md'>
-                <Image
-                  width={1000}
-                  height={1000}
-                  src='/images/orkelo-screenshot.jpg'
-                  alt='orkelo'
-                  className='group-hover/card:scale-110 transition-transform duration-600'
-                />
-              </div>
-              <p className='text-gray-300 text-xs'>
-                {' '}
-                project management and task tracking app where users can create
-                tasks, set reminders, manage checklists, drag and drop tasks and
-                columns, upload daily reports, track time and manage financial
-                operations.
-              </p>
-            </CardContent>
-            <CardFooter className='flex justify-end'>
-              <BtnHover1 before='Visit Orkelo' after='Lets go!' />
-            </CardFooter>
-          </Card>
+              </CardContent>
+              <CardFooter className='flex justify-end'>
+                <BtnHover1 before='Visit Orkelo' after='Lets go!' />
+              </CardFooter>
+            </Card>
+          </GlareHover>
         </div>
       </div>
     </section>

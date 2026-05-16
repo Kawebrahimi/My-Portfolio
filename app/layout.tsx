@@ -4,6 +4,7 @@ import './globals.css';
 import { cn } from '@/lib/utils';
 import Header from '@/components/Header';
 import SmoothScroll from '@/components/SmoothScroll';
+import GradualBlurMemo from '@/components/ui/gradual-blur';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
@@ -42,6 +43,16 @@ export default function RootLayout({
       <body className='flex flex-col min-h-300 bg-slate-950'>
         <Header />
         <SmoothScroll>{children}</SmoothScroll>
+        <GradualBlurMemo
+          target='page'
+          position='bottom'
+          height='7rem'
+          strength={5}
+          divCount={2}
+          curve='bezier'
+          exponential
+          opacity={0.9}
+        />
       </body>
     </html>
   );

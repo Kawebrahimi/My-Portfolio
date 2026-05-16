@@ -2,7 +2,7 @@
 import { heroCards, heroIcons } from '@/constants/hero-section';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
-import HeroCard from './HeroCard';
+import HeroCard from '../HeroCard';
 import { TypeAnimation } from 'react-type-animation';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
